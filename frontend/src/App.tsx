@@ -2,10 +2,11 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 import { useAuth } from './hooks/useAuth';
 import  LoginPage  from './pages/LoginPage';
-import { RegisterPage } from './pages/RegisterPage';
-import { DashboardPage } from './pages/DashboardPage';
-import { TasksPage } from './pages/TaskPage';
-import { LoadingSpinner } from './components/common/LoadingSpinner';
+import  RegisterPage  from './pages/RegisterPage';
+import  DashboardPage from './pages/DashboardPage';
+import TasksPage from './pages/TaskPage';
+import  LoadingSpinner from './components/common/LoadingSpinner';
+import "./App.css";
 
 const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, loading } = useAuth();
