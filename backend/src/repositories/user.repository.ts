@@ -1,0 +1,35 @@
+// src/repositories/user.repository.ts
+import { PrismaClient, User } from '@prisma/client';
+
+export class UserRepository {
+  constructor(private prisma: PrismaClient) {}
+
+  async create(data: { email: string; password: string; name: string }): Promise<User> {
+    return this.prisma.user.create({ data });
+  }
+
+  async findByEmail(email: string): Promise<User | null> {
+    return this.prisma.user.findUnique({ where: { email } });
+  }
+
+  async findById(id: string): Promise<User | null> {
+    return this.prisma.user.findUnique({
+      where: { id },
+      select: { id: true, email: true, name: true, createdAt: true },
+    });
+  }
+
+  async findAll() {
+    return this.prisma.user.findMany({
+      select: { id: true, email: true, name: true },
+    });
+  }
+
+  async update(id: string, data: { name?: string }): Promise<User> {
+    return this.prisma.user.update({
+      where: { id },
+      data,
+      select: { id: true, email: true, name: true, createdAt: true },
+    });
+  }
+}
